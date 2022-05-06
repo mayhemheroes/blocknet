@@ -1,0 +1,7 @@
+project: rnshah9/mayhem-blocknet
+target: txundo-deserialize
+image: ghcr.io/rnshah9/mayhem-blocknet
+
+cmds:
+  - cmd: /fuzz/script_flags
+    afl: true
