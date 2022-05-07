@@ -28,8 +28,6 @@ RUN add-apt-repository ppa:ubuntu-toolchain-r/test \
   g++-8-multilib gcc-8-multilib binutils-gold \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENV PROJECTDIR=/opt/blocknet/blocknet
-ENV BASEPREFIX=$PROJECTDIR/depends
 ENV HOST=x86_64-pc-linux-gnu
 
 # Copy source files
@@ -39,10 +37,10 @@ ADD . /opt/blocknet/blocknet
 RUN mkdir -p /opt/blockchain/config \
   && mkdir -p /opt/blockchain/data \
   && ln -s /opt/blockchain/config /root/.blocknet 
-WORKDIR ${BASEPREFIX}
+WORKDIR /opt/blocknet/blocknet/depends
 RUN make -j$ecores 
 RUN make install 
-WORKDIR ${PROJECTDIR}
+WORKDIR /opt/blocknet/blocknet
 RUN chmod +x ./autogen.sh; sync \
   && ./autogen.sh 
 
@@ -72,4 +70,4 @@ RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:bitcoin/bitcoin
 RUN apt-get update
 RUN apt-get install -y libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
-COPY --from=builder /opt/blocknet/blocknet/src/test/fuzz/ ./fuzz
+COPY --from=builder /opt/blocknet/blocknet/src/test/fuzz/ /fuzz
