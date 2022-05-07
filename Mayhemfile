@@ -1,5 +1,5 @@
 project: rnshah9/mayhem-blocknet
-target: txundo-deserialize
+target: script-flags
 image: ghcr.io/rnshah9/mayhem-blocknet
 
 cmds:
