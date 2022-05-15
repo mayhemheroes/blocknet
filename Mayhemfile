@@ -1,6 +1,5 @@
 project: rnshah9/mayhem-blocknet
 target: script-flags
-image: ghcr.io/rnshah9/mayhem-blocknet
 
 cmds:
   - cmd: /fuzz/script_flags

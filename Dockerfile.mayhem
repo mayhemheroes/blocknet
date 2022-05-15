@@ -67,7 +67,9 @@ RUN make
 FROM ubuntu:bionic
 RUN apt-get update
 RUN apt-get install -y software-properties-common
+
 RUN add-apt-repository ppa:bitcoin/bitcoin
 RUN apt-get update
 RUN apt-get install -y libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
+
 COPY --from=builder /opt/blocknet/blocknet/src/test/fuzz/ /fuzz
