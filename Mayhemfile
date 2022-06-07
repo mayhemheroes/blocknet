@@ -1,0 +1,6 @@
+project: blocknet
+target: script-flags
+
+cmds:
+  - cmd: /fuzz/script_flags
+    afl: true
